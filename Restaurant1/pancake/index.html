@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>modelViewer</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+    <style>
+    body {
+        margin: 0;
+        overflow: hidden;
+      }
+      model-viewer {
+        width: 0px;
+        height: 0px;
+        visibility: hidden;
+      }
+      
+      model-viewer::part(ar-button) {
+      display: none;
+        }
+        #my-ar-button {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            /* padding: 12px 24px; */
+            font-size: 18px;
+            background-color: #0f62fe;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <model-viewer id="mv" src="assets\01\pancake.glb" camera-controls ar ar-modes="webxr scene-viewer" ar-scale="fixed" poster="assets\01\pancakes_u1_v1_diffuse.png">
+    </model-viewer>
+    
+    <button id="my-ar-button" >
+        <img src="assets\01\pancakes_u1_v1_diffuse.png" alt="View in your space" style="width: 50%; height: 75%;">
+    </button>
+
+    
+    <script type="module">
+        const modelViewer = document.getElementById('mv');
+        const arButton = document.getElementById('my-ar-button');
+        arButton.addEventListener('click',  () => {
+            console.log('Custom AR button clicked');
+            modelViewer.activateAR();
+        });
+
+    </script>
+    </body>
+    </html>
+</body>
+</html>
