@@ -6,7 +6,10 @@
     <title>modelViewer</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
     <style>
+
     body {
+        /* background-color: rgb(0, 0, 0); */
+        background-image: url('bg.png');
         margin: 0;
         overflow: hidden;
       }
@@ -19,39 +22,92 @@
       model-viewer::part(ar-button) {
       display: none;
         }
-        #my-ar-button {
-            position: absolute;
-            bottom: 50%;
-            left: 50%;
-            transform: translateX(-50%);
-            /* padding: 12px 24px; */
-            font-size: 18px;
-            background-color: #0f62fe;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            z-index: 10;
-            opacity: 0.9;
-        }
+    
+    .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center(50%);
+    justify-content: center;
+    }
+
+    .button{
+        position: relative;
+        width: 50%;
+        font-size: 18px;
+        background-color: #daad1c;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 10;
+        opacity: 0.9;
+        display: inline-block;
+    }
+
     </style>
 </head>
 <body>
 
-    <model-viewer id="mv" src="assets\01\pancake.glb" camera-controls ar ar-modes="webxr scene-viewer" ar-scale="fixed" poster="assets\01\pancakes_u1_v1_diffuse.png">
+    <model-viewer id="pancake3D" src="pancake\assets\03\pancakes.glb" camera-controls ar ar-modes="webxr scene-viewer" ar-scale="fixed" poster="pancake\assets\01\pancakes_u1_v1_diffuse.png">
+
+    </model-viewer>
+
+    <model-viewer id="sushi3D" src="sushi\assets\02\sushi.glb" camera-controls ar ar-modes="webxr scene-viewer" ar-scale="fixed" poster="sushi\preview.png">
+
+    </model-viewer>
+
+    <model-viewer id="quesodilla3D" src="quesodilla\assets\02\quesodilla.glb" camera-controls ar ar-modes="webxr scene-viewer" ar-scale="fixed" poster="sushi\preview.png">
+
     </model-viewer>
     
-    <button id="my-ar-button" >
-        <img src="assets\01\pancakes_u1_v1_diffuse.png" alt="View in your space" style="width: 50%; height: 75%;">
-    </button>
+    <div class="container">
+        <div class="button">
+            <button id="button1" >
+                <img src="pancake\preview.png" alt="View in your space" style="width: 100%;">
+            </button>
+            
+            <button id="button2" >
+                <img src="sushi\preview.png" alt="View in your space" style="width: 100%;">
+            </button>
 
+            <button id="button3" >
+                <img src="quesodilla\preview.png" alt="View in your space" style="width: 100%;">
+            </button>
+        </div>
+    </div>
+
+    <script>
     
+    const modelViewerColor = document.querySelector("model-viewer#color");
+    const [material] = modelViewerColor.model.materials;
+    material.pbrMetallicRoughness.setRoughnessFactor(1);
+    
+    </script>
     <script type="module">
-        const modelViewer = document.getElementById('mv');
-        const arButton = document.getElementById('my-ar-button');
-        arButton.addEventListener('click',  () => {
+
+        const modelViewer1 = document.getElementById('pancake3D');
+        const arButton1 = document.getElementById('button1');
+
+        arButton1.addEventListener('click',  () => {
             console.log('Custom AR button clicked');
-            modelViewer.activateAR();
+            modelViewer1.activateAR();
+        });
+    
+
+        const modelViewer2 = document.getElementById('sushi3D');
+        const arButton2 = document.getElementById('button2');
+
+            arButton2.addEventListener('click',  () => {
+                console.log('Custom AR button clicked');
+                modelViewer2.activateAR();
+        });
+
+        const modelViewer3 = document.getElementById('quesodilla3D');
+        const arButton3 = document.getElementById('button3');
+
+            arButton3.addEventListener('click',  () => {
+                console.log('Custom AR button clicked');
+                modelViewer3.activateAR();
         });
 
     </script>
